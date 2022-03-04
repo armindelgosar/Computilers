@@ -15,6 +15,8 @@ tokens = (
     'T_STRINGLITERAL',
     'T_BOOLEANLITERAL',
     'T_ID',
+    'DEFINE',
+    'IMPORT',
     'PLUS',
     'MINUS',
     'TIMES',
@@ -37,9 +39,11 @@ t_RPAREN = r'\)'
 t_ignore = ' \t'
 t_T_ID = r'[a-zA-Z_][a-zA-Z_0-9]*'
 t_T_DOUBLELITERAL = r'/^[0-9]+(\\.[0-9]+)?$'
-t_T_STRINGLITERAL = r'(?s).+'
-t_T_INTLITERAL = r'^\d+$'
+t_T_STRINGLITERAL = r'"(?s).+"'
+# t_T_INTLITERAL = r'\d+'
 t_T_BOOLEANLITERAL = r'^(?i)(true|false)$'
+t_DEFINE = r'define'
+t_IMPORT = r'import'
 
 
 # Regular Expression rule with action
@@ -50,6 +54,12 @@ t_T_BOOLEANLITERAL = r'^(?i)(true|false)$'
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
+
+
+def t_T_INTLITERAL(t):
+    r'\d+'
+    t.value = int(t.value)
+    return t
 
 
 # A string containing ignored characters (spaces and tabs)
