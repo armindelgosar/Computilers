@@ -1,15 +1,20 @@
-from .lexer import new_lexer
+from compiler.lexer import lexer
+from os import environ as env
+from dotenv import load_dotenv
 
 
-def run(input_file_address: str) -> str:
-    lexer = new_lexer()
-    result = ''
-
+def run(input_file_address: str) -> None:
     with open(input_file_address) as input_file:
-        input_file.read()
+        data = input_file.read()
 
+    lexer.input(data)
     while True:
         token = lexer.token()
-        result += token
+        if not token:
+            break  # No more input
+        print(token)
 
-    return result
+
+if __name__ == '__main__':
+    load_dotenv('../.env')
+    run(input_file_address=env['SCANNER_INPUT_FILE_ADDRESS'])
