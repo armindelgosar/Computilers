@@ -35,6 +35,7 @@ reserved = {
 tokens = [
              'T_INTLITERAL',
              'T_DOUBLELITERAL',
+             'T_DOUBLELITERAL',
              'T_STRINGLITERAL',
              'T_BOOLEANLITERAL',
              'T_ID',
@@ -134,7 +135,11 @@ def t_newline(t):
 
 
 def t_T_INTLITERAL(t):
-    r'\d+'
+    r'(0(x|X)[0-9a-fA-F]+|[0-9]+)'
+    return t
+
+def T_DOUBLELITERAL(t):
+    r'(-|+)?[\d.]+(?:(e|E)(-|+)?\d+)?'
     return t
 
 def t_T_BOOLEANLITERAL(t):
