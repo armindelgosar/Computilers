@@ -33,9 +33,12 @@ reserved = {
     'while': 'WHILE',
 }
 tokens = [
+             'PLUS_EQUAL',
+             'MINUS_EQUAL',
+             'MULTIPLY_EQUAL',
+             'DIVIDE_EQUAL',
+             'T_DOUBLELITERAL',
              'T_INTLITERAL',
-             'T_DOUBLELITERAL',
-             'T_DOUBLELITERAL',
              'T_STRINGLITERAL',
              'T_BOOLEANLITERAL',
              'T_ID',
@@ -53,6 +56,7 @@ tokens = [
              'SEMICOLON',
              'BAR',
              'EQUAL',
+             'MODULE',
              'LOGICAL_OR',
              'LOGICAL_AND',
              'LOGICAL_EQUAL',
@@ -62,6 +66,7 @@ tokens = [
              'SMALLER_THAN',
              'SMALLER_THAN_OR_EQUAL',
              'COMMA',
+             'EXCLAMATION',
              'ignore',
              'newline',
              'error',
@@ -82,14 +87,20 @@ t_SEMICOLON = r'\;'
 t_BAR = r'\|'
 t_EQUAL = r'\='
 t_LOGICAL_OR = r'\|\|'
+t_MODULE = r'%'
 t_LOGICAL_AND = r'\&\&'
 t_LOGICAL_EQUAL = r'\=\='
+t_PLUS_EQUAL = r'\+\='
+t_MINUS_EQUAL = r'-\='
+t_MULTIPLY_EQUAL = r'\*\='
+t_DIVIDE_EQUAL = r'/\='
 t_LOGICAL_NON_EQUAL = r'\!\='
 t_BIGGER_THAN = r'\>'
 t_BIGGER_THAN_OR_EQUAL = r'\>\='
 t_SMALLER_THAN = r'\<'
 t_SMALLER_THAN_OR_EQUAL = r'\<\='
 t_COMMA = r'\,'
+t_EXCLAMATION = r'!'
 t_ignore = ' \t'
 # reserved Regular Expressions
 t_FUNC = r'__func__'
@@ -125,7 +136,7 @@ t_WHILE = r'while'
 
 
 t_T_ID = r'[a-zA-Z_][a-zA-Z_0-9]*'
-t_T_DOUBLELITERAL = r'/^[0-9]+(\\.[0-9]+)?$'
+t_T_DOUBLELITERAL = r'([0-9]+(\.[0-9]*)|([0-9]*(\.[0-9]+))|([0-9]+(\.[0-9]+)))'
 t_T_STRINGLITERAL = r'"(?s).+"'
 
 
@@ -135,12 +146,12 @@ def t_newline(t):
 
 
 def t_T_INTLITERAL(t):
-    r'(0(x|X)[0-9a-fA-F]+|[0-9]+)'
+    r'(0(x|X)[0-9a-fA-F]+|([0-9]+))'
     return t
 
-def T_DOUBLELITERAL(t):
-    r'(-|+)?[\d.]+(?:(e|E)(-|+)?\d+)?'
-    return t
+# def T_DOUBLELITERAL(t):
+#     r'([0-9])*(\.[0-9]*)(e(-|\+)?\d+)?'
+#     return t
 
 def t_T_BOOLEANLITERAL(t):
     r'(?<![a-zA-Z0-9_])(true|false)(?![a-zA-Z0-9_])'
