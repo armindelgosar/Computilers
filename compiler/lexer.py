@@ -135,7 +135,6 @@ def t_newline(t):
 
 def t_T_INTLITERAL(t):
     r'\d+'
-    t.value = int(t.value)
     return t
 
 def t_T_BOOLEANLITERAL(t):
