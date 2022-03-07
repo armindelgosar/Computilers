@@ -39,6 +39,7 @@ tokens = [
              'T_BOOLEANLITERAL',
              'T_ID',
              'PLUS',
+             'POINT',
              'MINUS',
              'TIMES',
              'DIVIDE',
@@ -65,6 +66,7 @@ tokens = [
              'error',
          ] + list(reserved.values())
 
+t_POINT = r'\.'
 t_PLUS = r'\+'
 t_MINUS = r'\-'
 t_TIMES = r'\*'
