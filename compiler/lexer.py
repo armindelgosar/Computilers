@@ -124,8 +124,6 @@ t_WHILE = r'while'
 t_T_ID = r'[a-zA-Z_][a-zA-Z_0-9]*'
 t_T_DOUBLELITERAL = r'/^[0-9]+(\\.[0-9]+)?$'
 t_T_STRINGLITERAL = r'"(?s).+"'
-# t_T_INTLITERAL = r'\d+'
-t_T_BOOLEANLITERAL = r'^(?i)(true|false)$'
 
 
 def t_newline(t):
@@ -136,6 +134,11 @@ def t_newline(t):
 def t_T_INTLITERAL(t):
     r'\d+'
     t.value = int(t.value)
+    return t
+
+def t_T_BOOLEANLITERAL(t):
+    r'(?<![a-zA-Z0-9_])(true|false)(?![a-zA-Z0-9_])'
+    t.type = reserved.get(t.value, 'T_BOOLEANLITERAL')
     return t
 
 
