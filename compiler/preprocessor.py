@@ -11,7 +11,7 @@ def preprocess(input_data: str, replacement_tokens):
 
 
 def factorize_preprocess(input_data: str):
-    define_regex = r'define (.*) (.*)'
+    define_regex = r'define (\S*)\s(.*)'
     matched_patterns = re.findall(define_regex, input_data)
     return matched_patterns
 

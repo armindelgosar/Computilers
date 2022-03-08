@@ -9,20 +9,20 @@ def run(input_file_address: str) -> str:
         data = input_file.read()
     data = run_preprocess(input_data=data)
     lexer.input(data)
-    skipLineNo = -1
+    skip_line_no = -1
     while True:
         token = lexer.token()
         if not token:
             break
 
-        if (token.lineno == skipLineNo):
+        if token.lineno == skip_line_no:
             continue
 
-        if (token.type == "DEFINE"):
-            skipLineNo = token.lineno
+        if token.type == "DEFINE":
+            skip_line_no = token.lineno
             continue
 
-        if (token.type.startswith("T_")):
+        if token.type.startswith("T_"):
             result += token.type + " " + str(token.value) + "\n"
             print(token.type + " " + str(token.value))
         else:
@@ -30,5 +30,3 @@ def run(input_file_address: str) -> str:
             print(str(token.value))
 
     return result
-
-
