@@ -1,6 +1,5 @@
-from compiler.preprocessor import run_preprocess
 from compiler.lexer import lexer
-from dotenv import load_dotenv
+from compiler.preprocessor import run_preprocess
 
 
 def run(input_file_address: str) -> str:
@@ -16,14 +15,14 @@ def run(input_file_address: str) -> str:
         if not token:
             break
 
-        if(token.lineno == skipLineNo):
+        if (token.lineno == skipLineNo):
             continue
 
-        if(token.type == "DEFINE"):
+        if (token.type == "DEFINE"):
             skipLineNo = token.lineno
             continue
 
-        if(token.type.startswith("T_")):
+        if (token.type.startswith("T_")):
             result += token.type + " " + str(token.value) + "\n"
             print(token.type + " " + str(token.value))
         else:
@@ -32,6 +31,4 @@ def run(input_file_address: str) -> str:
 
     return result
 
-if __name__ == '__main__':
-    load_dotenv('../.env')
-    run(input_file_address=env['SCANNER_INPUT_FILE_ADDRESS'])
+

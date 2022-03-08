@@ -134,24 +134,20 @@ t_THIS = r'this'
 t_VOID = r'void'
 t_WHILE = r'while'
 
-
 t_T_ID = r'[a-zA-Z_][a-zA-Z_0-9]*'
-t_T_DOUBLELITERAL = r'([0-9]+(\.[0-9]*)|([0-9]*(\.[0-9]+))|([0-9]+(\.[0-9]+)))'
 t_T_STRINGLITERAL = r'"(?s).+"'
+t_T_INTLITERAL = r'(0(x|X)[0-9a-fA-F]+|([0-9]+))'
+
+
+def t_T_DOUBLELITERAL(t):
+    r'([0-9]+(\.[0-9]*)((e|E)(\+|-)?[0-9]+)?|([0-9]+(\.[0-9]+)((e|E)(\+|-)?[0-9]+)?))'
+    return t
 
 
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-
-def t_T_INTLITERAL(t):
-    r'(0(x|X)[0-9a-fA-F]+|([0-9]+))'
-    return t
-
-# def T_DOUBLELITERAL(t):
-#     r'([0-9])*(\.[0-9]*)(e(-|\+)?\d+)?'
-#     return t
 
 def t_T_BOOLEANLITERAL(t):
     r'(?<![a-zA-Z0-9_])(true|false)(?![a-zA-Z0-9_])'
