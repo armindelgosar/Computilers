@@ -151,23 +151,15 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 
-def t_T_INTLITERAL(t):
-    r'(0(x|X)[0-9a-fA-F]+|([0-9]+))'
-    return t
-
-
 def t_T_COMMENT(t):
     r'(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)'
     pass
+
 
 def t_T_SINGLE_COMMENT(t):
     r'//.*'
     pass
 
-
-# def T_DOUBLELITERAL(t):
-#     r'([0-9])*(\.[0-9]*)(e(-|\+)?\d+)?'
-#     return t
 
 def t_T_BOOLEANLITERAL(t):
     r'(?<![a-zA-Z0-9_])(true|false)(?![a-zA-Z0-9_])'
