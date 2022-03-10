@@ -138,8 +138,12 @@ t_VOID = r'void'
 t_WHILE = r'while'
 
 t_T_ID = r'[a-zA-Z_][a-zA-Z_0-9]*'
-t_T_STRINGLITERAL = r'"(?s).+"'
 t_T_INTLITERAL = r'(0(x|X)[0-9a-fA-F]+|([0-9]+))'
+
+
+def t_T_STRINGLITERAL(t):
+    r'\"(\\\"|[^\"])*\"'
+    return t
 
 
 def t_T_DOUBLELITERAL(t):
