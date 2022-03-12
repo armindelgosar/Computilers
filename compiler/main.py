@@ -1,15 +1,32 @@
-from .lexer import new_lexer
+from compiler.lexer import lexer
+from compiler.preprocessor import run_preprocess
 
 
 def run(input_file_address: str) -> str:
-    lexer = new_lexer()
     result = ''
 
     with open(input_file_address) as input_file:
-        input_file.read()
-
+        data = input_file.read()
+    data = run_preprocess(input_data=data)
+    lexer.input(data)
+    skip_line_no = -1
     while True:
         token = lexer.token()
-        result += token
+        if not token:
+            break
+
+        if token.lineno == skip_line_no:
+            continue
+
+        if token.type == "DEFINE":
+            skip_line_no = token.lineno
+            continue
+
+        if token.type.startswith("T_"):
+            result += token.type + " " + str(token.value) + "\n"
+            print(token.type + " " + str(token.value))
+        else:
+            result += str(token.value) + "\n"
+            print(str(token.value))
 
     return result
