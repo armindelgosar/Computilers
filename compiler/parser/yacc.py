@@ -1,8 +1,9 @@
 import ply.yacc as yacc
 import logging
-from lexer import tokens
+from compiler.lexer import tokens
 from compiler.lexer import lexer
 from compiler.statements import *
+from compiler.parser import *
 
 precedence = (
     ('right', 'ASSIGN'),
@@ -32,24 +33,6 @@ binary_operations = {
     '>': 'gt',
     '>=': 'geq'
 }
-
-
-def p_continue_stmt(p):
-    'ContinueStmt : CONTINUE SEMICOLON'
-    # p[0] = ContinueStmt(p[1])
-
-
-def p_break_stmt(p):
-    'BreakStmt : BREAK SEMICOLON'
-    # add semantic
-
-
-
-def p_error(p):
-    if p is None:
-        print("unexpected end of file")
-    else:
-        print("unexpected token : " + str(p))
 
 
 def make_parser(input_program):
