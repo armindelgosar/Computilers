@@ -39,6 +39,12 @@ def p_continue_stmt(p):
     # p[0] = ContinueStmt(p[1])
 
 
+def p_break_stmt(p):
+    'BreakStmt : BREAK SEMICOLON'
+    # add semantic
+
+
+
 def p_error(p):
     if p is None:
         print("unexpected end of file")
