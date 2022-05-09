@@ -3,25 +3,34 @@ import logging
 from lexer import tokens
 from compiler.lexer import lexer
 
+precedence = (
+    ('right', 'ASSIGN'),
+    ('left', 'OR'),
+    ('left', 'AND'),
+    ('nonassoc', 'EQ', 'NEQ'),
+    ('nonassoc', 'LEQ', 'GEQ', 'LT', 'GT'),
+    ('left', 'PLUS', 'MINUS'),
+    ('left', 'MULTIPLY', 'DIVIDE'),
+    ('right', 'NOT'),
+    ('right', 'UMINUS'),
+    ('right', 'ELSE'),
+    ('right', 'RPAREN'),
+)
 
-def p_constant(p):
-    '''Constant : intConstant
-    | doubleConstant
-    | boolConstant
-    | stringConstant
-    | null'''
-    p[0] = p[1]
-
-
-def p_call(p):
-    '''Call : ident (Actuals)
-    | Expr . ident (Actuals)'''
-
-
-def p_boolconstant(p):
-    '''boolConstant : T_BOOLEANLITERAL
-    '''
-    p[0] = p[1]
+binary_operations = {
+    '+': 'add',
+    '-': 'sub',
+    '*': 'mul',
+    '/': 'div',
+    '&&': 'and',
+    '||': 'or',
+    '==': 'eq',
+    '!=': 'neq',
+    '<': 'lt',
+    '<=': 'leq',
+    '>': 'gt',
+    '>=': 'geq'
+}
 
 
 def p_error(p):
