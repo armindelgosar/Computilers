@@ -2,6 +2,7 @@ import ply.yacc as yacc
 import logging
 from lexer import tokens
 from compiler.lexer import lexer
+from compiler.statements import *
 
 precedence = (
     ('right', 'ASSIGN'),
@@ -31,6 +32,11 @@ binary_operations = {
     '>': 'gt',
     '>=': 'geq'
 }
+
+
+def p_continue_stmt(p):
+    'ContinueStmt : CONTINUE SEMICOLON'
+    # p[0] = ContinueStmt(p[1])
 
 
 def p_error(p):
