@@ -1,10 +1,16 @@
 from compiler.lexer import lexer
 from compiler.preprocessor import run_preprocess
+from compiler.yacc import make_parser
+
+
+def run_parser(input_file_address):
+    with open(input_file_address) as input_file:
+        data = input_file.read()
+    make_parser(data)
 
 
 def run(input_file_address: str) -> str:
     result = ''
-
     with open(input_file_address) as input_file:
         data = input_file.read()
     data = run_preprocess(input_data=data)
