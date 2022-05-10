@@ -1,3 +1,9 @@
+def p_prototype(p):
+    '''Prototype : Type T_ID LPAREN Formals RPAREN SEMICOLON
+    | VOID T_ID LPAREN Formals RPAREN SEMICOLON
+    '''
+
+
 def p_stmt(p):
     '''Expr SEMICOLON
     | SEMICOLON
