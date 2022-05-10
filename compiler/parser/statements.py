@@ -1,3 +1,18 @@
+def p_stmt(p):
+    '''Expr SEMICOLON
+    | SEMICOLON
+    | IfStmt
+    | WhileStmt
+    | ForStmt
+    | BreakStmt
+    | ContinueStmt
+    | ReturnStmt
+    | PrintStmt
+    | StmtBlock
+    '''
+    # semantics
+
+
 def p_if_stmt(p):
     '''IfStmt : IF LPAREN Expr RPAREN Stmt
     | IF LPAREN Expr RPAREN Stmt ELSE Stmt
@@ -32,3 +47,15 @@ def p_break_stmt(p):
 def p_continue_stmt(p):
     'ContinueStmt : CONTINUE SEMICOLON'
     # p[0] = ContinueStmt(p[1])
+
+
+def p_print_expr(p):
+    '''PrintExpr : Expr
+    | Expr COMMA PrintExpr
+    '''
+    # semantic
+
+
+def p_print_stmt(p):
+    'PrintStmt : Print LPAREN PrintExpr RPAREN SEMICOLON'
+    # semantic
