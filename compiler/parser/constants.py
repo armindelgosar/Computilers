@@ -21,3 +21,14 @@ def p_actuals(p):
     | empty
     '''
     pass
+
+
+def p_type(p):
+    '''Type : INT
+    | DOUBLE
+    | BOOL
+    | STRING
+    | T_ID
+    | Type LBRACKET RBRACKET
+    '''
+    pass
