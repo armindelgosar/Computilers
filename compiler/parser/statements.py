@@ -6,6 +6,13 @@ def p_prototype(p):
 def p_macro(p):
     'Macro : IMPORT STRING'
 
+def p_decl(p):
+    '''Decl : VariableDecl
+    | FunctionDecl
+    | ClassDecl
+    | InterfaceDecl
+    '''
+
 
 def p_program(p):
     'Program : ProgramMacroExpr ProgramDeclExpr'
