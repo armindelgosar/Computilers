@@ -3,8 +3,10 @@ def p_prototype(p):
     | VOID T_ID LPAREN Formals RPAREN SEMICOLON
     '''
 
+
 def p_macro(p):
     'Macro : IMPORT STRING'
+
 
 def p_decl(p):
     '''Decl : VariableDecl
@@ -13,11 +15,14 @@ def p_decl(p):
     | InterfaceDecl
     '''
 
-def p_variable(p):
+
+def p_variable_decl(p):
     'VariableDecl: Variable SEMICOLON'
+
 
 def p_variable(p):
     'Variable : Type T_ID'
+
 
 def p_type(p):
     '''Type: INT
@@ -28,20 +33,21 @@ def p_type(p):
     | Type LBRACE RBRACE
     '''
 
+
 def p_program(p):
     'Program : ProgramMacroExpr ProgramDeclExpr'
 
 
 def p_program_macro_expr(p):
-    '''ProgramMacroExpr : Macro
+    '''ProgramMacroExpr : ProgramMacroExpr Macro
     | empty
     '''
 
+
 def p_program_decl_expr(p):
     '''ProgramDeclExpr : Decl
-    | ProgramDeclExprDecl
+    | ProgramDeclExpr Decl
     '''
-
 
 
 def p_stmt(p):
@@ -105,3 +111,31 @@ def p_print_expr(p):
 def p_print_stmt(p):
     'PrintStmt : Print LPAREN PrintExpr RPAREN SEMICOLON'
     # semantic
+
+
+def p_function_decl(p):
+    """
+    FunctionDecl : Type T_ID LPAREN Formals RPAREN StmtBlock
+    | VOID T_ID LPAREN Formals RPAREN StmtBlock
+    """
+
+
+def p_class_decl(p):
+    """
+    ClassDecl : CLASS T_ID SMALLER_THAN EXTENDS T_id BIGGER_THAN SMALLER_THAN IMPLEMENTS TIDEXPR BIGGER_THAN LBRACE FieldExpr RBRACE
+    | VOID T_ID LPAREN Formals RPAREN StmtBlock
+    """
+
+
+def p_tid_expr(p):
+    """
+    TIDEXPR: T_ID
+    | TIDEXPR COMMA T_ID
+    """
+
+
+def p_field_expr(p):
+    """
+    FieldExpr : FieldExpr Field
+    | empty
+    """

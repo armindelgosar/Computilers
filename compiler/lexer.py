@@ -7,6 +7,8 @@ reserved = {
     'break': 'BREAK',
     'btoi': 'BTOI',
     'class': 'CLASS',
+    'extends': 'EXTENDS',
+    'implements': 'IMPLEMENTS',
     'continue': 'CONTINUE',
     'define': 'DEFINE',
     'double': 'DOUBLE',
@@ -112,6 +114,8 @@ t_BOOL = r'bool'
 t_BREAK = r'break'
 t_BTOI = r'btoi'
 t_CLASS = r'class'
+t_EXTENDS = r'extends'
+t_IMPLEMENTS = r'implements'
 t_CONTINUE = r'continue'
 t_DEFINE = r'define'
 t_DOUBLE = r'double'
