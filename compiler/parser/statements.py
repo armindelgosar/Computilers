@@ -3,6 +3,21 @@ def p_prototype(p):
     | VOID T_ID LPAREN Formals RPAREN SEMICOLON
     '''
 
+def p_program(p):
+    'Program : ProgramMacroExpr ProgramDeclExpr'
+
+
+def p_program_macro_expr(p):
+    '''ProgramMacroExpr : Macro
+    | empty
+    '''
+
+def p_program_decl_expr(p):
+    '''ProgramDeclExpr : Decl
+    | ProgramDeclExprDecl
+    '''
+
+
 
 def p_stmt(p):
     '''Expr SEMICOLON
