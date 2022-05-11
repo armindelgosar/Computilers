@@ -194,14 +194,14 @@ def p_access_mode(p):
 
 def p_interface_decl(p):
     """
-    InterfaceDecl : INTERFACE T_id LBRACE PrototypeExpr RBRACE
+    InterfaceDecl : INTERFACE T_ID LBRACE PrototypeExpr RBRACE
     """
 
 
 def p_prototype(p):
     """
-    ProtoType : Type T_id LPAREN Formals RPAREN SEMICOLON
-    | VOID T_id LPAREN Formals RPAREN SEMICOLON
+    ProtoType : Type T_ID LPAREN Formals RPAREN SEMICOLON
+    | VOID T_ID LPAREN Formals RPAREN SEMICOLON
     """
 
 
@@ -209,4 +209,72 @@ def p_prototype_expr(p):
     """
     PrototypeExpr : PrototypeExpr ProtoType
     | empty
+    """
+
+
+def p_expr(p):
+    """
+    Expr: LValue EQUAL Expr
+    | Constant
+    | LValue
+    | THIS
+    | Call
+    | LPAREN Expr RPAREN
+    | Expr PLUS Expr
+    | Expr MINUS Expr
+    | Expr DIVIDE Expr
+    | Expr TIMES Expr
+    | Expr MODULE Expr
+    | MINUS Expr
+    | Expr BIGGER_THAN Expr
+    | Expr BIGGER_THAN_OR_EQUAL Expr
+    | Expr SMALLER_THAN Expr
+    | Expr SMALLER_THAN_OR_EQUAL Expr
+    | Expr LOGICAL_EQUAL Expr
+    | Expr LOGICAL_NON_EQUAL Expr
+    | Expr LOGICAL_AND Expr
+    | Expr LOGICAL_OR Expr
+    | EXCLAMATION Expr
+    | READINTEGER LPAREN RPAREN
+    | READLINE LPAREN RPAREN
+    | NEW T_ID
+    | NEWARRAY LPAREN Expr COMMA Type RPAREN
+    | ITOD LPAREN Expr RPAREN
+    | DTOI LPAREN Expr RPAREN
+    | ITOB LPAREN Expr RPAREN
+    | BTOI LPAREN Expr RPAREN
+    """
+
+
+def p_expr_expr(p):
+    """
+    ExprExpr : ExprExpr COMMA Expr | Expr
+    """
+
+
+def p_l_value(p):
+    """
+    LValue : T_ID | Expr POINT T_ID | Expr LBRACKET Expr RBRACKET
+    """
+
+
+def p_call(p):
+    """
+    T_ID LPAREN Actuals RPAREN | Expr POINT T_ID LPAREN Actuals RPAREN
+    """
+
+
+def p_actuals(p):
+    """
+    Actuals: ExprExpr | empty
+    """
+
+
+def p_constant(p):
+    """
+     Constant : T_INTLITERAL Constant
+     | T_DOUBLELITERAL Constant
+     | T_BOOLEANLITERAL Constant
+     | T_STRINGLITERAL Constant
+     | NULL
     """
