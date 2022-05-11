@@ -24,6 +24,13 @@ def p_variable(p):
     'Variable : Type T_ID'
 
 
+def p_variable_decl_expr(p):
+    """
+    VariableDeclExpr : VariableDeclExpr VariableDecl
+    | empty
+    """
+
+
 def p_type(p):
     '''Type: INT
     | DOUBLE
@@ -51,7 +58,7 @@ def p_program_decl_expr(p):
 
 
 def p_stmt(p):
-    '''Expr SEMICOLON
+    '''Stmt : SMALLER_THAN Expr BIGGER_THAN SEMICOLON
     | SEMICOLON
     | IfStmt
     | WhileStmt
@@ -63,6 +70,20 @@ def p_stmt(p):
     | StmtBlock
     '''
     # semantics
+
+
+def p_stmt_expr(p):
+    """
+    StmtExpr : StmtExpr Stmt
+    | empty
+    """
+
+
+def p_stmt_block(p):
+    """
+    StmtBlock : LBRACE VariableDeclExpr StmtExpr RBRACE
+    | empty
+    """
 
 
 def p_if_stmt(p):
