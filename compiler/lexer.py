@@ -26,12 +26,14 @@ reserved = {
     'Print': 'PRINT',
     'private': 'PRIVATE',
     'public': 'PUBLIC',
+    'protected': 'PROTECTED',
     'ReadInteger': 'READINTEGER',
     'ReadLine': 'READLINE',
     'return': 'RETURN',
     'string': 'STRING',
     'this': 'THIS',
     'void': 'VOID',
+    'interface': 'INTERFACE',
     'while': 'WHILE',
 }
 tokens = [
@@ -116,6 +118,7 @@ t_BTOI = r'btoi'
 t_CLASS = r'class'
 t_EXTENDS = r'extends'
 t_IMPLEMENTS = r'implements'
+t_INTERFACE = r'interface'
 t_CONTINUE = r'continue'
 t_DEFINE = r'define'
 t_DOUBLE = r'double'
@@ -133,6 +136,7 @@ t_NULL = r'null'
 t_PRINT = r'Print'
 t_PRIVATE = r'private'
 t_PUBLIC = r'public'
+t_PROTECTED = r'protected'
 t_READINTEGER = r'ReadInteger'
 t_READLINE = r'ReadLine'
 t_RETURN = r'return'

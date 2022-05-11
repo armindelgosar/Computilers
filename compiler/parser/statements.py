@@ -139,3 +139,53 @@ def p_field_expr(p):
     FieldExpr : FieldExpr Field
     | empty
     """
+
+
+def p_variable_expr(p):
+    """
+    VariableExpr : Variable
+    | VariableExpr COMMA Variable
+    """
+
+
+def p_formals(p):
+    """
+    Formals : VariableExpr
+    | empty
+    """
+
+
+def p_field(p):
+    """
+    Field : AccessMode  VariableDecl
+    | AccessMode  FunctionDecl
+    """
+
+
+def p_access_mode(p):
+    """
+    AccessMode: PRIVATE
+    | PROTECTED
+    | PUBLIC
+    | empty
+    """
+
+
+def p_interface_decl(p):
+    """
+    InterfaceDecl : INTERFACE T_id LBRACE PrototypeExpr RBRACE
+    """
+
+
+def p_prototype(p):
+    """
+    ProtoType : Type T_id LPAREN Formals RPAREN SEMICOLON
+    | VOID T_id LPAREN Formals RPAREN SEMICOLON
+    """
+
+
+def p_prototype_expr(p):
+    """
+    PrototypeExpr : PrototypeExpr ProtoType
+    | empty
+    """
