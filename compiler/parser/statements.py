@@ -12,8 +12,12 @@ def p_decl(p):
     | ClassDecl
     | InterfaceDecl
     '''
+
 def p_variable(p):
     'VariableDecl: Variable SEMICOLON'
+
+def p_variable(p):
+    'Variable : Type T_ID'
 
 def p_program(p):
     'Program : ProgramMacroExpr ProgramDeclExpr'
