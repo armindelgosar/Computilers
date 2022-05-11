@@ -19,6 +19,15 @@ def p_variable(p):
 def p_variable(p):
     'Variable : Type T_ID'
 
+def p_type(p):
+    '''Type: INT
+    | DOUBLE
+    | T_ID
+    | BOOL
+    | STRING
+    | Type LBRACE RBRACE
+    '''
+
 def p_program(p):
     'Program : ProgramMacroExpr ProgramDeclExpr'
 
