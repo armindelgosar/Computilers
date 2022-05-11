@@ -3,6 +3,10 @@ def p_prototype(p):
     | VOID T_ID LPAREN Formals RPAREN SEMICOLON
     '''
 
+def p_macro(p):
+    'Macro : IMPORT STRING'
+
+
 def p_program(p):
     'Program : ProgramMacroExpr ProgramDeclExpr'
 
