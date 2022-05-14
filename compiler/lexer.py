@@ -75,7 +75,7 @@ tokens = [
              'EXCLAMATION',
              'ignore',
              'newline',
-             'error',
+             # 'error',
          ] + list(reserved.values())
 
 t_POINT = r'\.'
