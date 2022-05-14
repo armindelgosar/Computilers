@@ -1,6 +1,6 @@
 from compiler.lexer import lexer
 from compiler.preprocessor import run_preprocess
-from compiler.parser.yacc import make_parser
+from compiler.yacc import make_parser
 
 
 def run_parser(input_file_address):
