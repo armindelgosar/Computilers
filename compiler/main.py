@@ -30,10 +30,10 @@ def run(input_file_address: str) -> bool:
 
         if token.type.startswith("T_"):
             result += token.type + " " + str(token.value) + "\n"
-            print(token.type + " " + str(token.value))
+            # print(token.type + " " + str(token.value))
         else:
             result += str(token.value) + "\n"
-            print(str(token.value))
+            # print(str(token.value))
 
-    result = run_parser()
+    result = run_parser(input_file_address)
     return result
