@@ -1,19 +1,5 @@
 import ply.yacc as yacc
-import logging
-from compiler.lexer import tokens
-from compiler import lexer
-from compiler.statements import *
-from compiler.parser import *
-import ply.lex as lex
-
-def p_constants(p):
-    '''Constants : T_INTLITERAL
-    | T_DOUBLELITERAL
-    | T_BOOLEANLITERAL
-    | T_STRINGLITERAL
-    | NULL
-    '''
-    # semantic
+from compiler.lexer import *
 
 
 def p_actual_expr(p):
@@ -56,6 +42,7 @@ def p_function_decl(p):
     '''
     pass
 
+
 def p_empty(p):
     'empty :'
     pass
@@ -69,7 +56,7 @@ def p_error(p):
 
 
 def p_macro(p):
-    'Macro : IMPORT STRING'
+    'Macro : IMPORT T_STRINGLITERAL'
 
 
 def p_decl(p):
@@ -79,11 +66,13 @@ def p_decl(p):
     | InterfaceDecl
     '''
 
+
 def p_variable_decl_expr(p):
     """
     VariableDeclExpr : VariableDeclExpr VariableDecl
     | empty
     """
+
 
 def p_program(p):
     'Program : ProgramMacroExpr ProgramDeclExpr'
@@ -305,6 +294,7 @@ def p_call(p):
     | Expr POINT T_ID LPAREN Actuals RPAREN
     '''
 
+
 def p_constant(p):
     '''
      Constant : T_INTLITERAL Constant
@@ -313,6 +303,7 @@ def p_constant(p):
      | T_STRINGLITERAL Constant
      | NULL
     '''
+
 
 parser = yacc.yacc()
 
@@ -328,4 +319,3 @@ parser = yacc.yacc()
 #     else:
 #         # print("Parsing failed")
 #         return False
-
