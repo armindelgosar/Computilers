@@ -43,6 +43,6 @@ def make_parser(input_program):
     log = logging.getLogger()
     result = parser.parse(input_program, lexer=lexer, debug=log)
     if parser.errorok:
-        print("Parsing succeeded")
+        return True
     else:
-        print("Parsing failed")
+        return False
