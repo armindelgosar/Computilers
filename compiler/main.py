@@ -15,7 +15,7 @@ def run(input_file_address: str) -> bool:
     log = logging.getLogger()
     try:
         res = parser.parse(input=data, debug=True)
-        #return True
+        # return True
         return "OK"
     except SyntaxError as e:
         return "Syntax Error"

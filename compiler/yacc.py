@@ -1,5 +1,4 @@
 import logging
-
 import ply.yacc as yacc
 from compiler.lexer import tokens
 
@@ -20,19 +19,8 @@ def p_program_macro_expr(p):
 
 def p_program_decl_expr(p):
     """ProgramDeclExpr : Decl ProgramDeclExpr
-    | empty
+    | Decl
     """
-
-
-def p_type(p):
-    """Type : INT
-    | DOUBLE
-    | BOOL
-    | STRING
-    | T_ID
-    | Type LBRACKET RBRACKET
-    """
-    pass
 
 
 def p_variable_decl(p):
@@ -309,6 +297,17 @@ def p_constant(p):
 
 def p_empty(p):
     """empty :"""
+    pass
+
+
+def p_type(p):
+    """Type : INT
+    | DOUBLE
+    | BOOL
+    | STRING
+    | T_ID
+    | Type LBRACKET RBRACKET
+    """
     pass
 
 
