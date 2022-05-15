@@ -3,10 +3,6 @@ import logging
 import ply.yacc as yacc
 from compiler.lexer import tokens
 
-precedence = (
-    ('left', 'PLUS', 'MINUS'),
-)
-
 
 def p_program(p):
     """Program : ProgramMacroExpr ProgramDeclExpr"""
@@ -23,7 +19,7 @@ def p_program_macro_expr(p):
 
 
 def p_program_decl_expr(p):
-    """ProgramDeclExpr : ProgramDeclExpr Decl
+    """ProgramDeclExpr : Decl ProgramDeclExpr
     | empty
     """
 
@@ -41,7 +37,7 @@ def p_type(p):
 
 def p_variable_decl(p):
     """VariableDecl : Variable SEMICOLON"""
-    pass
+    print(p[1])
 
 
 def p_variable(p):
@@ -65,8 +61,8 @@ def p_decl(p):
 
 
 def p_variable_decl_expr(p):
-    """VariableDeclExpr : VariableDecl VariableDeclExpr
-    | empty
+    """VariableDeclExpr : empty
+    | VariableDeclExpr VariableDecl
     """
 
 
@@ -134,7 +130,6 @@ def p_prototype_expr(p):
 
 def p_stmt_block(p):
     """StmtBlock : LBRACE VariableDeclExpr StmtExpr RBRACE"""
-    pass
 
 
 def p_stmt(p):
@@ -153,8 +148,8 @@ def p_stmt(p):
 
 
 def p_stmt_expr(p):
-    """StmtExpr : Stmt StmtExpr
-    | empty
+    """StmtExpr : empty
+    | Stmt StmtExpr
     """
 
 
@@ -208,27 +203,39 @@ def p_print_stmt(p):
     pass
 
 
+def p_expr_l_temp(p):
+    """ExprLValueTemp : EQUAL Expr
+    | empty
+    """
+    pass
+
+
+def p_math_func(p):
+    """MathFunc : PLUS Expr
+    | MINUS Expr
+    | DIVIDE Expr
+    | TIMES Expr
+    | MODULE Expr
+    | BIGGER_THAN Expr
+    | BIGGER_THAN_OR_EQUAL Expr
+    | SMALLER_THAN Expr
+    | SMALLER_THAN_OR_EQUAL Expr
+    | LOGICAL_EQUAL Expr
+    | LOGICAL_NON_EQUAL Expr
+    | LOGICAL_AND Expr
+    | LOGICAL_OR Expr
+    """
+    pass
+
+
 def p_expr(p):
-    """Expr : LValue EQUAL Expr
+    """Expr : LValue ExprLValueTemp
     | Constant
-    | LValue
     | THIS
     | Call
     | LPAREN Expr RPAREN
-    | Expr PLUS Expr
-    | Expr MINUS Expr
-    | Expr DIVIDE Expr
-    | Expr TIMES Expr
-    | Expr MODULE Expr
+    | Expr MathFunc
     | MINUS Expr
-    | Expr BIGGER_THAN Expr
-    | Expr BIGGER_THAN_OR_EQUAL Expr
-    | Expr SMALLER_THAN Expr
-    | Expr SMALLER_THAN_OR_EQUAL Expr
-    | Expr LOGICAL_EQUAL Expr
-    | Expr LOGICAL_NON_EQUAL Expr
-    | Expr LOGICAL_AND Expr
-    | Expr LOGICAL_OR Expr
     | EXCLAMATION Expr
     | READINTEGER LPAREN RPAREN
     | READLINE LPAREN RPAREN
@@ -241,29 +248,45 @@ def p_expr(p):
     """
 
 
+def p_expr_temp(p):
+    """ExprTemp : COMMA ExprExpr
+    | empty
+    """
+
+
 def p_expr_expr(p):
-    '''ExprExpr : Expr COMMA ExprExpr
-    | Expr
-    '''
+    """ExprExpr : Expr ExprTemp"""
 
 
 def p_l_value(p):
     """LValue : T_ID
-    | Expr POINT T_ID
     | Expr LBRACKET Expr RBRACKET
+    | Expr POINT T_ID
     """
+    pass
+
+
+def p_call_temp(p):
+    """CallTemp : T_ID LPAREN Actuals RPAREN"""
+    pass
 
 
 def p_call(p):
-    """Call : T_ID LPAREN Actuals RPAREN
-    | Expr POINT T_ID LPAREN Actuals RPAREN
+    """Call : CallTemp
+    | Expr POINT CallTemp
     """
+    pass
+
+
+def p_actual_temp(p):
+    """ActualTemp : empty
+    | COMMA ActualExpr
+    """
+    pass
 
 
 def p_actual_expr(p):
-    """ActualExpr : Expr
-    | Expr COMMA ActualExpr
-    """
+    """ActualExpr : Expr ActualTemp"""
     pass
 
 
