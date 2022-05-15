@@ -7,6 +7,8 @@ reserved = {
     'break': 'BREAK',
     'btoi': 'BTOI',
     'class': 'CLASS',
+    'extends': 'EXTENDS',
+    'implements': 'IMPLEMENTS',
     'continue': 'CONTINUE',
     'define': 'DEFINE',
     'double': 'DOUBLE',
@@ -24,12 +26,14 @@ reserved = {
     'Print': 'PRINT',
     'private': 'PRIVATE',
     'public': 'PUBLIC',
+    'protected': 'PROTECTED',
     'ReadInteger': 'READINTEGER',
     'ReadLine': 'READLINE',
     'return': 'RETURN',
     'string': 'STRING',
     'this': 'THIS',
     'void': 'VOID',
+    'interface': 'INTERFACE',
     'while': 'WHILE',
 }
 tokens = [
@@ -71,7 +75,7 @@ tokens = [
              'EXCLAMATION',
              'ignore',
              'newline',
-             'error',
+             # 'error',
          ] + list(reserved.values())
 
 t_POINT = r'\.'
@@ -81,8 +85,8 @@ t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-t_LBRACE = r'{'
-t_RBRACE = r'}'
+t_LBRACE = r'\{'
+t_RBRACE = r'\}'
 t_LBRACKET = r'\['
 t_RBRACKET = r'\]'
 t_SEMICOLON = r';'
@@ -112,6 +116,9 @@ t_BOOL = r'bool'
 t_BREAK = r'break'
 t_BTOI = r'btoi'
 t_CLASS = r'class'
+t_EXTENDS = r'extends'
+t_IMPLEMENTS = r'implements'
+t_INTERFACE = r'interface'
 t_CONTINUE = r'continue'
 t_DEFINE = r'define'
 t_DOUBLE = r'double'
@@ -122,13 +129,14 @@ t_IF = r'if'
 t_IMPORT = r'import'
 t_INT = r'int'
 t_ITOB = r'itob'
-t_ITOD = r'ITOD'
+t_ITOD = r'itod'
 t_NEW = r'new'
 t_NEWARRAY = r'NewArray'
 t_NULL = r'null'
 t_PRINT = r'Print'
 t_PRIVATE = r'private'
 t_PUBLIC = r'public'
+t_PROTECTED = r'protected'
 t_READINTEGER = r'ReadInteger'
 t_READLINE = r'ReadLine'
 t_RETURN = r'return'
