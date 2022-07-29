@@ -5,6 +5,7 @@ from compiler.lexer import tokens
 
 def p_program(p):
     """Program : ProgramMacroExpr ProgramDeclExpr"""
+    """"""
 
 
 def p_macro(p):
